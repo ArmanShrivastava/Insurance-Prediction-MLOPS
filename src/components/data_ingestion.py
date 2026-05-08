@@ -2,6 +2,12 @@
 import os
 import sys
 
+# When running this module directly, ensure the project root is on sys.path
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(os.path.dirname(current_dir))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
 from pandas import DataFrame
 from sklearn.model_selection import train_test_split
 
@@ -12,7 +18,7 @@ from src.logger import logging
 from src.data_access.proj1_data import Proj1Data
 
 
-# the beloe function is to fetch data from MongoDB and save it as CSV file
+# the below function is to fetch data from MongoDB and save it as CSV file
 class DataIngestion:
     def __init__(self,data_ingestion_config:DataIngestionConfig=DataIngestionConfig()):
         """
@@ -105,9 +111,3 @@ class DataIngestion:
             return data_ingestion_artifact
         except Exception as e:
             raise MyException(e, sys) from e
-
-        
-        
-
-
-        
