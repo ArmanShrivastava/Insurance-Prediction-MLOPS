@@ -1,3 +1,4 @@
+#define the project structure and create the necessary files and directories for the project. This code will create the directories and files as specified in the list_of_files variable. If a file already exists, it will print a message indicating that the file already exists.
 import os
 from pathlib import Path
 
