@@ -70,5 +70,5 @@ MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE: float = 0.02
 MODEL_BUCKET_NAME = "insurance-python-mlopsproject"
 MODEL_PUSHER_S3_KEY = "model-registry"
 
-APP_HOST = os.getenv("APP_HOST", "127.0.0.1")
+APP_HOST = os.getenv("APP_HOST", "0.0.0.0")
 APP_PORT = int(os.getenv("APP_PORT", "8000"))
