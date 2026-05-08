@@ -94,5 +94,5 @@ class MongoDBClient:
             logging.error(f"Error while connecting to MongoDB: {str(e)}")
             raise MyException(e, sys) from e
 
-                
-       
+
+
