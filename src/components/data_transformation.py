@@ -85,7 +85,7 @@ class DataTransformation:
     def _map_gender_column(self, df):
         """Map Gender column to 0 for Female and 1 for Male."""
         logging.info("Mapping 'Gender' column to binary values")
-        df['Gender'] = df['Gender'].map({'Female': 0, 'Male': 1}).astype(int)
+        df['Gender'] = df['Gender'].map({'Female': 0, 'Male': 1}).fillna(0).astype('Int64')
         return df
 
     def _create_dummy_columns(self, df):
@@ -111,7 +111,7 @@ class DataTransformation:
         logging.info("Dropping 'id' column")
         drop_col = self._schema_config['drop_columns']
         if drop_col in df.columns:
-            df = df.drop(drop_col, axis=1)
+            df = df.drop(columns=[drop_col])
         return df
 
     def initiate_data_transformation(self) -> DataTransformationArtifact:
@@ -128,10 +128,14 @@ class DataTransformation:
             test_df = self.read_data(file_path=self.data_ingestion_artifact.test_file_path)
             logging.info("Train-Test data loaded")
 
-            input_feature_train_df = train_df.drop(columns=[TARGET_COLUMN], axis=1)
+            # Drop rows with NaN in target column
+            train_df = train_df.dropna(subset=[TARGET_COLUMN])
+            test_df = test_df.dropna(subset=[TARGET_COLUMN])
+
+            input_feature_train_df = train_df.drop(columns=[TARGET_COLUMN])
             target_feature_train_df = train_df[TARGET_COLUMN]
 
-            input_feature_test_df = test_df.drop(columns=[TARGET_COLUMN], axis=1)
+            input_feature_test_df = test_df.drop(columns=[TARGET_COLUMN])
             target_feature_test_df = test_df[TARGET_COLUMN]
             logging.info("Input and Target cols defined for both train and test df.")
 

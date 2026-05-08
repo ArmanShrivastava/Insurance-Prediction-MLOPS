@@ -1,5 +1,5 @@
 columns:
-  - id: int
+  - _id: object
   - Gender: category
   - Age: int
   - Driving_License: int
