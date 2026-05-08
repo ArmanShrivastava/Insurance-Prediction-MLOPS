@@ -142,4 +142,12 @@ async def predictRouteClient(request: Request):
 
 # Main entry point to start the FastAPI server
 if __name__ == "__main__":
-    app_run(app, host=APP_HOST, port=APP_PORT)
+    try:
+        app_run(app, host=APP_HOST, port=APP_PORT)
+    except OSError as e:
+        error_message = (
+            f"Failed to start FastAPI server on {APP_HOST}:{APP_PORT}. "
+            f"Reason: {e}.\n"
+            "If the port is already in use, set APP_PORT to a free port and retry."
+        )
+        raise SystemExit(error_message)
