@@ -1,4 +1,3 @@
-MONGODB_URL="mongodb+srv://armanroot:Up63!8970@cluster-insurance-azure.t2p4emd.mongodb.net/?appName=Cluster-insurance-azure"
 import os
 import sys
 from pathlib import Path
@@ -93,6 +92,3 @@ class MongoDBClient:
         except Exception as e:  
             logging.error(f"Error while connecting to MongoDB: {str(e)}")
             raise MyException(e, sys) from e
-
-
-
